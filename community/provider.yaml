@@ -1,4 +1,3 @@
----
 apiVersion: aws.crossplane.io/v1beta1
 kind: ProviderConfig
 metadata:
@@ -16,15 +15,3 @@ spec:
       namespace: crossplane
       name: aws-secret
       key: creds
----
-apiVersion: s3.aws.crossplane.io/v1beta1
-kind: Bucket
-metadata:
-  name: bucket1
-  namespace: crossplane
-spec:
-  forProvider:
-    locationConstraint: us-east-1
-    acl: public-read
-  providerConfigRef:
-    name: provider-aws-community
