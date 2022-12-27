@@ -1,0 +1,16 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-community
+  namespace: crossplane
+spec:
+  package: "xpkg.upbound.io/crossplane-contrib/provider-aws:v0.34.0"
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-upbound
+  namespace: crossplane
+spec:
+  package: "xpkg.upbound.io/upbound/provider-aws:v0.24.0"
+---

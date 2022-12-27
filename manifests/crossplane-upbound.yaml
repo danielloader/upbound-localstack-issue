@@ -1,0 +1,28 @@
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: provider-aws-upbound
+  namespace: crossplane
+spec:
+  endpoint:
+    hostnameImmutable: true
+    url: 
+      type: Static
+      static: http://crossplane-localstack:4566
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane
+      name: aws-secret
+      key: creds
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: bucket2
+  namespace: crossplane
+spec:
+  forProvider:
+    region: us-east-1
+  providerConfigRef:
+    name: provider-aws-upbound

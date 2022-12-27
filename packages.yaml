@@ -1,0 +1,55 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: crossplane-stable
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://charts.crossplane.io/stable
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crossplane
+  namespace: flux-system
+spec:
+  interval: 5m
+  targetNamespace: crossplane
+  install:
+    createNamespace: true
+  chart:
+    spec:
+      chart: crossplane
+      sourceRef:
+        kind: HelmRepository
+        name: crossplane-stable
+        namespace: flux-system
+      interval: 1m
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: localstack
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://localstack.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: localstack
+  namespace: flux-system
+spec:
+  interval: 5m
+  targetNamespace: crossplane
+  install:
+    createNamespace: true
+  chart:
+    spec:
+      chart: localstack
+      sourceRef:
+        kind: HelmRepository
+        name: localstack
+        namespace: flux-system
+      interval: 1m
